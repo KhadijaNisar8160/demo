@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
+// import { NavLink } from "react-router-dom";
 
 const products = {
   "Mi-Pod PRO": [
@@ -110,63 +111,115 @@ const products = {
 
 export default function ProductFilter() {
   const [selectedCategory, setSelectedCategory] = useState("Mi-Pod PRO");
+  const [cart, setCart] = useState([]);
+  const [isCartOpen, setIsCartOpen] = useState(false);
+
+  const addToCart = (product) => {
+    setCart([...cart, product]);
+    setIsCartOpen(true);
+  };
+
+  const removeFromCart = (index) => {
+    setCart(cart.filter((_, i) => i !== index));
+  };
 
   return (
     <div className="container mx-auto py-8">
-      <h1 className=" text-2xl font-bold">
-        ____________ V A P E <span className="ml-2">K I T S</span>
-      </h1>
-      <div className="p-5">
-        <ul className="flex justify-center gap-8 font-semibold text-2xl p-5">
-          {Object.keys(products).map((category) => (
-            <li
-              key={category}
-              className={`cursor-pointer ${
-                selectedCategory === category
-                  ? "border-b-2 border-gray-700"
-                  : "text-gray-700"
-              }`}
-              onClick={() => setSelectedCategory(category)}
-            >
-              {category}
-            </li>
-          ))}
-        </ul>
+      <h1 className="lg:text-2xl text-lg font-bold">___________VAPE KITS</h1>
+      <ul className="flex justify-center text-sm lg:gap-8 gap-2 font-semibold lg:text-2xl p-5">
+        {Object.keys(products).map((category) => (
+          <li
+            key={category}
+            className={`cursor-pointer ${
+              selectedCategory === category
+                ? "border-b-2  border-gray-700"
+                : "text-gray-700 "
+            }`}
+            onClick={() => setSelectedCategory(category)}
+          >
+            {category}
+          </li>
+        ))}
+      </ul>
 
-        <div className="mt-5 text-center">
-          {/* <h2 className="text-xl font-bold mb-3">
-            {selectedCategory} Products
-          </h2> */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 ">
-            {Array.isArray(products[selectedCategory]) &&
-              products[selectedCategory].map((product, index) => (
-                <div key={index} className="justify-center p-4">
-                  <img
-                    src={product.image}
-                    alt={product.name}
-                    className="w-full h-48 rounded"
-                  />
-                  <h2 className="text-center text-sm mt-4">{product.name}</h2>
-                  <p className="text-gray-500 text-center font-medium">
-                    {product.price}
-                  </p>
-                  <NavLink to="/CartPage">
-                    <button className="mt-4 w-32  bg-black text-white py-2 rounded hover:bg-gray-800 transition duration-200">
-                      ADD TO CART
-                    </button>
-                  </NavLink>
-                </div>
-              ))}
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+        {products[selectedCategory].map((product, index) => (
+          <div key={index} className="p-4">
+            <img
+              src={product.image}
+              alt={product.name}
+              className="w-full h-48 rounded"
+            />
+            <h2 className="text-center text-sm mt-4">{product.name}</h2>
+            <p className="text-gray-500 text-center font-medium">
+              {product.price}
+            </p>
+            <button
+              className="mt-4 w-32 bg-black text-white py-2 ml-16 rounded hover:bg-gray-800"
+              onClick={() => addToCart(product)}
+            >
+              ADD TO CART
+            </button>
+          </div>
+        ))}
+      </div>
+
+      {/* Cart Sidebar */}
+      {isCartOpen && (
+        <div
+          className="fixed inset-0 bg-black bg-opacity-50"
+          onClick={() => setIsCartOpen(false)}
+        ></div>
+      )}
+      <div
+        className={`fixed top-0 right-0 lg:w-96 w-[350px] lg:h-screen h-full bg-white shadow-lg overflow-y-scroll transform ${
+          isCartOpen ? "translate-x-0" : "translate-x-full"
+        } transition-transform duration-300 p-4`}
+      >
+        <div className="flex ">
+          <button
+            className="absolute top-5 right-2"
+            onClick={() => setIsCartOpen(false)}
+          >
+            ✕
+          </button>
+          <div className="flex justify-between">
+            <h2 className="text-lg font-bold mb-4"> Cart</h2>
+            <h2 className="ml-36">Continue Shipping</h2>
           </div>
         </div>
-      </div>
-      <div className="flex justify-center p-16 border-b">
-        <button className="relative overflow-hidden bg-black text-white font-bold p-3 w-64 border border-transparent group">
-          <span className="relative z-10 transition-colors duration-300 group-hover:text-black">
-            VIEW ALL PRODUCTS
-          </span>
-          <span className="absolute inset-0 bg-white translate-x-full transition-transform duration-300 ease-in-out group-hover:-translate-x-0"></span>
-        </button>
+        <div className="border-t border-b p-2">
+          <h3>You are eligible for free shipping!</h3>
+        </div>
+        {cart.length === 0 ? (
+          <p className="text-gray-500 flex  text-center">Your cart is empty.</p>
+        ) : (
+          cart.map((item, index) => (
+            <div key={index} className="flex justify-between items-center  p-2">
+              <img src={item.image} alt={item.name} className="w-32 h-32" />
+              <div className="flex-1 ml-2">
+                <h3 className="text-sm font-medium">{item.name}</h3>
+                <p className="text-gray-500 text-sm">{item.price}</p>
+              </div>
+              <button
+                className="text-gray-500 mt-10"
+                onClick={() => removeFromCart(index)}
+              >
+                remove
+              </button>
+            </div>
+          ))
+        )}
+        <NavLink to="/CartList">
+          <div className="border-t mt-5 fix ">
+            <button className="relative overflow-hidden mt-5 bg-black text-white font-bold p-3 w-full  border border-transparent group">
+              <span className="relative z-10 transition-colors duration-300 group-hover:text-black">
+                CHECKOUT
+              </span>
+              <span className="absolute inset-0 bg-white translate-x-full transition-transform duration-300 ease-in-out group-hover:-translate-x-0"></span>
+            </button>
+          </div>
+        </NavLink>
       </div>
     </div>
   );

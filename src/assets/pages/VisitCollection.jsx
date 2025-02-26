@@ -1,37 +1,49 @@
+import Footer from "./Footer";
 import Header from "./Header";
 import MenuList from "./MenuList";
 import CategoryCollection from "./CategoryCollection";
-import Footer from "./Footer";
 const VisitCollection = () => {
   return (
-    <div>
+    <div className="w-full">
       <Header />
       <MenuList />
-      <div className="mx-5 mt-5">
-        <a href="/">
+
+      {/* Breadcrumb Navigation */}
+      <div className="mx-4 md:mx-10 mt-5 text-sm">
+        <a href="/" className="text-gray-600">
           <u>Home</u>
         </a>
-        <span className="font-semibold cursor-pointer"> - Vape Kits</span>
+        <span className="font-semibold text-gray-800"> - Vape Kits</span>
       </div>
-      <div>
-        <h1 className="text-3xl font-bold text-center mt-10">Vape Kits </h1>
-        <p className="text-center mx-32 mt-5 text-sm font-semibold text-gray-800">
-          Shop vape kits with incredible flavor production, vape experience and
+
+      {/* Page Title */}
+      <div className="px-4 md:px-10 lg:px-20">
+        <h1 className="text-2xl md:text-3xl font-bold text-center mt-6 md:mt-10">
+          Vape Kits
+        </h1>
+
+        {/* Description */}
+        <p className="text-center text-sm md:text-base font-semibold text-gray-800 mt-4 md:mt-6 md:max-w-3xl mx-auto">
+          Shop vape kits with incredible flavor production, vape experience, and
           incredible battery life today. Each vape kit available at Mi-Pod
           provides an incredible experience for vapers. Whether you are new to
-          vaping, or an experience vaper, we've got you covered with a
-          high-quality easy-to-use vape
-          <br /> device.
+          vaping or an experienced vaper, we've got you covered with a
+          high-quality easy-to-use vape device.
         </p>
-        <p className="text-center mt-10  mb-10">
+
+        {/* Additional Info */}
+        <p className="text-center text-xs md:text-sm mt-6 md:mt-10 mb-6 md:mb-10">
           Choose from hundreds of{" "}
-          <a className="text-purple-700 font-bold text-sm">
-            <u> vape juice flavors</u>
+          <a className="text-purple-700 font-bold">
+            <u>vape juice flavors</u>
           </a>{" "}
           to fill your vape kit device at the Mi-Pod online vape shop.
         </p>
-        <CategoryCollection />
       </div>
+
+      {/* Category Collection */}
+      <CategoryCollection />
+
       <Footer />
     </div>
   );

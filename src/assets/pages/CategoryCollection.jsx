@@ -4,8 +4,7 @@ import { db } from "../../Firebase";
 import { collection, getDocs } from "firebase/firestore";
 
 export default function ProductFilter() {
-  const [selectedCategory, setSelectedCategory] = useState("");
-  const [products, setProducts] = useState({});
+  const [products, setProducts] = useState([]);
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -14,23 +13,16 @@ export default function ProductFilter() {
         const snapshot = await getDocs(categoriesCollection);
 
         if (snapshot.empty) {
-          console.log("No documents found in Firestore.");
+          console.log("No products found in Firestore.");
           return;
         }
 
-        const productsData = {};
-
-        snapshot.forEach((doc) => {
-          console.log(`Fetched data for: ${doc.id}`, doc.data());
-          productsData[doc.id] = doc.data()?.items ?? [];
-        });
+        const productsData = snapshot.docs.map((doc) => ({
+          id: doc.id, // Store document ID if needed
+          ...doc.data(), // Spread all product data
+        }));
 
         setProducts(productsData);
-
-        // Set the first category dynamically
-        if (!selectedCategory && Object.keys(productsData).length > 0) {
-          setSelectedCategory(Object.keys(productsData)[0]);
-        }
       } catch (error) {
         console.error("Error fetching products:", error);
       }
@@ -38,18 +30,15 @@ export default function ProductFilter() {
 
     fetchProducts();
   }, []);
-  console.log("Final Products State:", products);
-  console.log("Selected Category:", selectedCategory);
-  console.log("Available Categories:", Object.keys(products));
 
   return (
     <div className="container mx-auto py-8">
       <div className="p-5">
         <div className="mt-5 text-center">
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
-            {products[selectedCategory]?.length > 0 ? (
-              products[selectedCategory].map((product, index) => (
-                <div key={index} className="justify-center p-4">
+            {products.length > 0 ? (
+              products.map((product) => (
+                <div key={product.id} className="justify-center p-4">
                   <img
                     src={product.image || "default-placeholder.jpg"}
                     alt={product.name || "Unnamed Product"}
@@ -59,11 +48,11 @@ export default function ProductFilter() {
                   <p className="text-gray-500 text-center font-medium">
                     {product.price}
                   </p>
-                  <NavLink to="/CartPage">
-                    <button className="mt-4 w-32 bg-black text-white py-2 rounded hover:bg-gray-800 transition duration-200">
-                      ADD TO CART
-                    </button>
-                  </NavLink>
+                  {/* <NavLink to="/CartPage"> */}
+                  <button className="mt-4 w-32 bg-black text-white py-2 rounded hover:bg-gray-800 transition duration-200">
+                    ADD TO CART
+                  </button>
+                  {/* </NavLink> */}
                 </div>
               ))
             ) : (

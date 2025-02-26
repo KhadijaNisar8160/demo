@@ -1,32 +1,38 @@
-const navItems = [
-  { title: "VAPE KITS", description: "Explore a variety of vape kits." },
-  { title: "VAPE PODS", description: "Find the best vape pods available." },
-  { title: "VAPE JUICE", description: "Discover delicious vape juices." },
-  { title: "DISPOSABLE VAPES", description: "No hassle, just vape." },
-  { title: "NIXODINE", description: "Experience our unique Nixodine product." },
-  {
-    title: "NICOTINE POUCHES",
-    description: "Explore our nicotine pouch options.",
-  },
-  { title: "VAPORIZERS", description: "Find your ideal vaporizer." },
-  { title: "DEALS", description: "Check out our latest deals." },
-  { title: "ABOUT US", description: "Learn more about our company." },
-];
-
 const MenuList = () => {
   return (
-    <div className="bg-white border-b ">
-      <ul className="flex justify-center space-x-8 p-4">
-        {navItems.map((item) => (
-          <li key={item.title} className="relative cursor-pointer group ">
-            <span className="text-gray-800 font-semibold">{item.title}</span>
-            <span className="hidden  group-hover:block absolute left-0 top-full mt-1 bg-white text-black text-sm p-2 rounded w-40 h-32 shadow-lg">
-              {item.description}
-            </span>
-          </li>
-        ))}
-      </ul>
-    </div>
+    <div></div>
+    // <div className="bg-white border-b">
+    //   <ul className="flex justify-center space-x-8 p-4">
+    //     {navItems.map((item) => (
+    //       <li key={item.title} className="relative group">
+    //         <span className="text-gray-800 font-semibold cursor-pointer">
+    //           {item.title}
+    //         </span>
+
+    //         {/* Fixed width mega menu */}
+    //         <div className="absolute left-1/2 -translate-x-1/5  top-full w-[800px] bg-white text-black shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 rounded-lg border">
+    //           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 p-6">
+    //             {Object.entries(item.subItems).map(([header, subItems]) => (
+    //               <div key={header}>
+    //                 <h2 className="text-lg font-semibold mb-3">{header}</h2>
+    //                 <ul>
+    //                   {subItems.map((subItem, index) => (
+    //                     <li
+    //                       key={index}
+    //                       className="mb-2 hover:text-blue-500 cursor-pointer"
+    //                     >
+    //                       {subItem}
+    //                     </li>
+    //                   ))}
+    //                 </ul>
+    //               </div>
+    //             ))}
+    //           </div>
+    //         </div>
+    //       </li>
+    //     ))}
+    //   </ul>
+    // </div>
   );
 };
 

@@ -72,7 +72,7 @@ const BrowseSlider = () => {
   return (
     <div className="relative mx-auto pb-20 max-w-6xl">
       {/* Title */}
-      <h2 className="text-center text-gray-700 text-2xl font-semibold p-6">
+      <h2 className="text-center text-gray-700 lg:text-2xl font-semibold p-6">
         BROWSE BY DISPOSABLE VAPES
       </h2>
 
@@ -89,7 +89,7 @@ const BrowseSlider = () => {
                 />
                 <div className="text-gray-600 text-center mt-2">
                   <h3 className="text-lg font-semibold">{image.title}</h3>
-                  <button className=" text-gray-700 px-4 py-2 mt-2 rounded-lg  transition">
+                  <button className="text-gray-700 px-4 py-2 mt-2 rounded-lg transition">
                     Browse Now
                   </button>
                 </div>
@@ -98,15 +98,15 @@ const BrowseSlider = () => {
           ))}
         </Slider>
 
-        {/* Navigation Buttons */}
+        {/* Navigation Buttons (Hidden on Mobile) */}
         <button
-          className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white text-gray-900 p-3 rounded-full shadow-md  transition"
+          className=" sm:block absolute left-0 top-1/2 transform -translate-y-1/2 bg-white text-gray-900 p-3 rounded-full shadow-md transition"
           onClick={() => sliderRef.current.slickPrev()}
         >
           &#10094;
         </button>
         <button
-          className="absolute right-0 top-1/2 transform -translate-y-1/2  text-gray-900 bg-white p-3 rounded-full shadow-md hover:bg-gray-800 transition"
+          className=" sm:block absolute right-0 top-1/2 transform -translate-y-1/2 bg-white text-gray-900 p-3 rounded-full shadow-md transition"
           onClick={() => sliderRef.current.slickNext()}
         >
           &#10095;

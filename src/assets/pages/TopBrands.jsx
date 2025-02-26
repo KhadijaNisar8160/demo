@@ -41,20 +41,20 @@ const brandLogos = {
 
 const TopBrands = () => {
   return (
-    <div className="border-t mx-auto pb-24">
+    <div className="border-t mx-auto pb-16 px-4">
       {/* Title */}
-      <h1 className="text-gray-700 font-semibold text-2xl p-16 text-center">
+      <h1 className="text-gray-700 font-semibold text-lg md:text-2xl p-8 text-center">
         FIND TOP VAPE BRANDS
       </h1>
 
       {/* Logo Grid */}
-      <div className="grid grid-cols-5 md:grid-cols-7 items-center gap-y-6 mx-32">
+      <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-7 items-center gap-6 lg:px-20 justify-center">
         {brandLogos.imageLinks.map((logo, index) => (
           <img
             key={index}
-            src={logo} // Fixed: Directly use `logo`
-            alt={`Brand Logo ${index + 1}`} // Added an alt attribute
-            className="w-[135px] cursor-pointer filter grayscale hover:grayscale-0 hover:-translate-y-2 transition-all duration-300"
+            src={logo}
+            alt={`Brand Logo ${index + 1}`}
+            className="max-w-[80px] sm:max-w-[100px] md:max-w-[135px] cursor-pointer filter grayscale hover:grayscale-0 hover:-translate-y-2 transition-all duration-300 mx-auto"
           />
         ))}
       </div>

@@ -18,24 +18,35 @@ const testimonials = [
 
 const Testimonials = () => {
   return (
-    <div className="p-16 border-t ">
-      <h2 className="text-center text-gray-700 text-2xl  mb-6">
+    <div className="px-4 sm:px-8 md:px-16 py-16 border-t">
+      {/* Title */}
+      <h2 className="text-center text-gray-700 text-xl sm:text-2xl font-semibold mb-8">
         WHAT PEOPLE SAY
       </h2>
-      <div className="flex space-x-4 mb-10 mx-10">
+
+      {/* Testimonials Grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mx-auto max-w-7xl">
         {testimonials.map((testimonial, index) => (
-          <div key={index} className="flex-1 bg-[#efefef] p-6 rounded-md ">
-            <div className="flex items-center justify-center mb-2">
+          <div
+            key={index}
+            className="bg-[#efefef] p-6 rounded-lg shadow-md text-center"
+          >
+            {/* Star Rating */}
+            <div className="flex justify-center mb-2">
               {[...Array(testimonial.rating)].map((_, i) => (
-                <span key={i} className="text-purple-500">
+                <span key={i} className="text-purple-500 text-lg">
                   &#9733;
                 </span>
               ))}
             </div>
-            <p className="text-gray-900 text-sm font-bold mb-4">
+
+            {/* Testimonial Text */}
+            <p className="text-gray-900 text-sm sm:text-base font-medium mb-4">
               {testimonial.text}
             </p>
-            <p className="text-gray-900 text-center font-bold text-sm">
+
+            {/* Author */}
+            <p className="text-gray-900 font-bold text-sm sm:text-base">
               {testimonial.author}
             </p>
           </div>

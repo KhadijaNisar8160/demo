@@ -25,22 +25,25 @@ const ProductSlider = () => {
   }, []);
 
   return (
-    <div className="flex">
-      <div className="ml-7 w-[750px] h-[390px] mt-5 rounded-md overflow-hidden object-cover ">
+    <div className="flex flex-col lg:flex-row items-center justify-center gap-4 px-4 md:px-8 lg:px-16 mt-5">
+      {/* Main Image Slider */}
+      <div className="w-full sm:w-[90%] md:w-[750px] h-44 sm:h-56 md:h-72 lg:h-96 rounded-md overflow-hidden">
         <img
           src={images[currentImageIndex]}
           alt={`Slide ${currentImageIndex}`}
-          className="w-full h-full object-cover cursor-pointer"
+          className="w-full h-full object-cover cursor-pointer rounded-md"
         />
       </div>
-      <div className="mt-5 ml-3 ">
+
+      {/* Side Images */}
+      <div className="flex flex-col gap-3 w-full sm:w-auto">
         <img
           src="https://mipod.com/cdn/shop/files/Lower-Nicotine-Vapes_Hero-Banner_Desktop_1920x800_7f0ef51f-cf02-4961-b173-8319bc8944bc_1600x.png?v=1724264504"
-          className="h-48 w-fit rounded-md mb-2 cursor-pointer"
+          className="h-24 sm:h-32 md:h-40 lg:h-48 w-full sm:w-auto rounded-md cursor-pointer"
         />
         <img
           src="https://mipod.com/cdn/shop/files/Zimo-Original_Hero-Banner_Desktop_1920x800_12-4-2024_1600x.png?v=1734127014"
-          className="h-48 w-fit rounded-md cursor-pointer"
+          className="h-24 sm:h-32 md:h-40 lg:h-48 w-full sm:w-auto rounded-md cursor-pointer"
         />
       </div>
     </div>
